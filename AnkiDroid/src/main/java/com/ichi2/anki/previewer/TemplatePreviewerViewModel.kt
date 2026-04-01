@@ -73,7 +73,7 @@ class TemplatePreviewerViewModel(
         notetype = arguments.notetype
         fillEmpty = arguments.fillEmpty
         isCloze = notetype.isCloze
-        ordFlow = MutableStateFlow(arguments.ord)
+        ordFlow = savedStateHandle.getMutableStateFlow("ord", arguments.ord)
 
         note =
             asyncIO {
@@ -197,6 +197,8 @@ class TemplatePreviewerViewModel(
                     position
                 }
             ordFlow.emit(ord)
+
+            savedStateHandle["ord"] = ord
         }
     }
 
